@@ -1,0 +1,19 @@
+<div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Mes</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venda of vendas">
+            <td>{{venda.produto}}</td>
+            <td>{{venda.quantidade}}</td>
+            <td>{{venda.mes}}</td>
+            <td>{{venda.valor_unico}}</td>
+        </tr>
+    </tbody>
+</table>

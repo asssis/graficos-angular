@@ -1,0 +1,196 @@
+{
+    "vendas": [
+      {
+        "produto": "arroz",
+        "quantidade": 10,
+        "valor_unico": "5,30",
+        "mes": "1"
+      },
+      {
+        "produto": "feijao",
+        "quantidade": 5,
+        "valor_unico": "7,30",
+        "mes": "2"
+      },
+      {
+        "produto": "creme_dental",
+        "quantidade": 10,
+        "valor_unico": "4,30",
+        "mes": "3"
+      },
+      {
+        "produto": "gas",
+        "quantidade": 5,
+        "valor_unico": "50,30",
+        "mes": "1"
+      },
+      {
+        "produto": "leite",
+        "quantidade": 5,
+        "valor_unico": "5,30",
+        "mes": "2"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 15,
+        "valor_unico": "9,30",
+        "mes": "3"
+      },
+      {
+        "produto": "cuscuz",
+        "quantidade": 4,
+        "valor_unico": "3,30",
+        "mes": "4"
+      },
+      {
+        "produto": "tomate",
+        "quantidade": 15,
+        "valor_unico": "3,30",
+        "mes": "5"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 10,
+        "valor_unico": "5,30",
+        "mes": "6"
+      },
+      {
+        "produto": "feijao",
+        "quantidade": 5,
+        "valor_unico": "7,30",
+        "mes": "7"
+      },
+      {
+        "produto": "creme_dental",
+        "quantidade": 10,
+        "valor_unico": "4,30",
+        "mes": "3"
+      },
+      {
+        "produto": "gas",
+        "quantidade": 5,
+        "valor_unico": "50,30",
+        "mes": "8"
+      },
+      {
+        "produto": "leite",
+        "quantidade": 5,
+        "valor_unico": "5,30",
+        "mes": "9"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 15,
+        "valor_unico": "9,30",
+        "mes": "10"
+      },
+      {
+        "produto": "cuscuz",
+        "quantidade": 4,
+        "valor_unico": "3,30",
+        "mes": "12"
+      },
+      {
+        "produto": "tomate",
+        "quantidade": 15,
+        "valor_unico": "3,30",
+        "mes": "11"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 10,
+        "valor_unico": "5,30",
+        "mes": "1"
+      },
+      {
+        "produto": "feijao",
+        "quantidade": 5,
+        "valor_unico": "7,30",
+        "mes": "2"
+      },
+      {
+        "produto": "creme_dental",
+        "quantidade": 10,
+        "valor_unico": "4,30",
+        "mes": "3"
+      },
+      {
+        "produto": "gas",
+        "quantidade": 5,
+        "valor_unico": "50,30",
+        "mes": "4"
+      },
+      {
+        "produto": "leite",
+        "quantidade": 5,
+        "valor_unico": "5,30",
+        "mes": "5"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 15,
+        "valor_unico": "9,30",
+        "mes": "6"
+      },
+      {
+        "produto": "cuscuz",
+        "quantidade": 4,
+        "valor_unico": "3,30",
+        "mes": "6"
+      },
+      {
+        "produto": "tomate",
+        "quantidade": 15,
+        "valor_unico": "3,30",
+        "mes": "7"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 10,
+        "valor_unico": "5,30",
+        "mes": "8"
+      },
+      {
+        "produto": "feijao",
+        "quantidade": 5,
+        "valor_unico": "7,30",
+        "mes": "9"
+      },
+      {
+        "produto": "creme_dental",
+        "quantidade": 10,
+        "valor_unico": "4,30",
+        "mes": "10"
+      },
+      {
+        "produto": "gas",
+        "quantidade": 5,
+        "valor_unico": "50,30",
+        "mes": "10"
+      },
+      {
+        "produto": "leite",
+        "quantidade": 5,
+        "valor_unico": "5,30",
+        "mes": "11"
+      },
+      {
+        "produto": "arroz",
+        "quantidade": 15,
+        "valor_unico": "9,30",
+        "mes": "12"
+      },
+      {
+        "produto": "cuscuz",
+        "quantidade": 4,
+        "valor_unico": "3,30",
+        "mes": "12"
+      },
+      {
+        "produto": "tomate",
+        "quantidade": 15,
+        "valor_unico": "3,30",
+        "mes": "12"
+      }
+    ]
+  }
