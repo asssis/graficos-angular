@@ -71,11 +71,11 @@ export class ChartVendaMensalComponent implements OnInit {
       for(let x of objetivos_ordenado)
       {
         if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
-          this.barChartLabels.push(this.get_week(x.mes));
           valor_projecao -= dados[x.mes]
           dados_projecao.push(dados[x.mes])
         }
         else{
+          this.barChartLabels.push(this.get_week(x.mes));
           var mes_projetado = valor_projecao / resto_periodo
           valor_projecao -= mes_projetado
           dados_projecao.push(mes_projetado)                                
