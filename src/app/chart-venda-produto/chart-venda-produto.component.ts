@@ -31,8 +31,10 @@ export class ChartVendaProdutoComponent implements OnInit {
 
 
   erro: any;
-  montar_grafico(vendas: Venda[])
+ 
+  montar_grafico(objetos: any)
   {
+    var vendas = objetos['vendas']
     var dados = {}
     
     for (let venda of vendas) {
@@ -55,8 +57,8 @@ export class ChartVendaProdutoComponent implements OnInit {
     this.barChartData = [{data: dado, label: 'Vendas'}];
   }
   getter()
-  {
-    this.service.getVendas().subscribe((data: Venda[]) => {
+  { 
+    this.service.getVendas().subscribe(data => {
       this.montar_grafico(data);
     }, (error: any) => {
         this.erro = error;

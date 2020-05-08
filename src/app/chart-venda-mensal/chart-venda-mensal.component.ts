@@ -34,6 +34,10 @@ export class ChartVendaMensalComponent implements OnInit {
     erro: any;
     montar_grafico(objetos: any)
     {
+      if(objetos == null)
+      {
+        return
+      }
       var vendas = objetos['vendas']
       var objetivos = objetos['objetivos']
       var dados = {}
@@ -81,17 +85,18 @@ export class ChartVendaMensalComponent implements OnInit {
       }
 
       this.barChartData = [
-
-      {data: dados_objetivos, label: 'Objetivo'},
+        {data: dados_objetivos, label: 'Objetivo'},
         {data: dado, label: 'Vendas'},
         {data: dados_projecao, label: 'Projeção'}
-    
     ];
     }
     getter()
     {
       this.service.getVendas().subscribe(data => {
+        if(data != null)
+        {
         this.montar_grafico(data);
+        }
       }, (error: any) => {
           this.erro = error;
           console.log('ERROR', error);            

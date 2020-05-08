@@ -15,8 +15,8 @@ export class TabelaVendasComponent implements OnInit {
   public vendas: Venda[];
   ngOnInit(): void {
 
-    this.service.getVendas().subscribe((data: Venda[]) => {
-      this.vendas = data
+    this.service.getVendas().subscribe((data: any) => {
+      this.vendas = data.vendas
     }, (error: any) => {
         this.erro = error;
         console.log('ERROR', error);            

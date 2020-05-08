@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
  })
 
 export class VendasService {
-   public vendas: any;
     
   constructor(private http: HttpClient) {}
    getVendas(): Observable<any>
