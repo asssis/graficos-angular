@@ -4,8 +4,7 @@ import { Venda } from '../models/venda'
 
 @Component({
   selector: 'app-chart-venda-mensal',
-  templateUrl: './chart-venda-mensal.component.html',
-  styleUrls: ['./chart-venda-mensal.component.css']
+  templateUrl: './chart-venda-mensal.component.html'
 })
 export class ChartVendaMensalComponent implements OnInit {
    
@@ -50,7 +49,7 @@ export class ChartVendaMensalComponent implements OnInit {
         {
           dados[mes] =  0
         }
-        dados[mes] += parseFloat(venda['quantidade'])* parseFloat(venda['valor_unico'].replace(',', '.'));
+        dados[mes] += parseFloat(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
       }
       for (let objetivo of objetivos)
       {
