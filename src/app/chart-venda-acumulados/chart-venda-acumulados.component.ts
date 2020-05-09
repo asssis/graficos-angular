@@ -51,6 +51,9 @@ export class ChartVendaAcumuladosComponent implements OnInit {
       var vendas_acumuladas = [];
       var campos_graficos = [];
       var valor_acumulado = 0;
+
+      
+
       for (let mes of meses )
       {
         valor_acumulado += venda_mes_valor[mes];

@@ -1,0 +1,3 @@
+{
+  "/dados/:vendas": "/posts?category=:category",
+}
