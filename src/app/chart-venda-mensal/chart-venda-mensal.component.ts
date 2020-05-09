@@ -50,7 +50,7 @@ export class ChartVendaMensalComponent implements OnInit {
         {
           dados[mes] =  0
         }
-        dados[mes] += parseFloat(venda['valor_unico'].replace(',', '.'));
+        dados[mes] += parseFloat(venda['quantidade'])* parseFloat(venda['valor_unico'].replace(',', '.'));
       }
       for (let objetivo of objetivos)
       {

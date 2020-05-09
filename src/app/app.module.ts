@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartVendaMensalComponent } from './chart-venda-mensal/chart-venda-mensal.component';
 import { ChartVendaProdutoComponent } from './chart-venda-produto/chart-venda-produto.component';
 import { TabelaVendasComponent } from './tabela-vendas/tabela-vendas.component';
+import { ChartVendaAcumuladosComponent } from './chart-venda-acumulados/chart-venda-acumulados.component';
 @NgModule({
   declarations: [
     AppComponent,
     ChartVendaMensalComponent,
     ChartVendaProdutoComponent,
-    TabelaVendasComponent
+    TabelaVendasComponent,
+    ChartVendaAcumuladosComponent
  ],
   imports: [
     BrowserModule,
