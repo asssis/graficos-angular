@@ -58,7 +58,6 @@ export class ChartVendaAcumuladosComponent implements OnInit {
       {
         valor_acumulado += venda_mes_valor[mes];
         vendas_acumuladas.push(valor_acumulado);
-        campos_graficos.push(this.get_week(mes));
       }
 
       this.barChartLabels = campos_graficos;

@@ -41,15 +41,14 @@ export class ChartVendaMensalComponent implements OnInit {
       var objetivos = objetos['objetivos']
       var dados = {}
       var valor_projecao = 0
-      var dados_projecao = [];
-
+      var serie_venda_projecao = [];
       for (let venda of vendas) {
         var mes = venda['mes'].toString().padStart(2, "0")
         if(dados[mes] == null)
         {
           dados[mes] =  0
         }
-        dados[mes] += parseFloat(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
+        dados[mes] += parseInt(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
       }
       for (let objetivo of objetivos)
       {
@@ -58,35 +57,45 @@ export class ChartVendaMensalComponent implements OnInit {
       var keys = Object.keys(dados).sort();
       
       var dado = []
+      var serie_venda_acumulada = []
       for (let key of keys) {
         this.barChartLabels.push(this.get_week(key));
         dado.push(dados[key]);
       } 
       var dados_objetivos = []
       var objetivos_ordenado = objetivos.sort(function(a,b){ return a.mes - b.mes;});
-
+      var valor_acumulado = 0;
       var total_objetivo_mes = 0
       var resto_periodo = objetivos_ordenado.length;
+      var serie_vendas_realizadas = []
       for(let x of objetivos_ordenado)
       {
         if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
           valor_projecao -= dados[x.mes]
-          dados_projecao.push(dados[x.mes])
+          valor_acumulado += dados[mes];
+          serie_venda_acumulada.push(valor_acumulado);
+         
+         
+          serie_vendas_realizadas.push(dados[x.mes]);
+          serie_venda_projecao.push(dados[x.mes]);
         }
         else{
           this.barChartLabels.push(this.get_week(x.mes));
           var mes_projetado = valor_projecao / resto_periodo
           valor_projecao -= mes_projetado
-          dados_projecao.push(mes_projetado)                                
-        }
+          serie_venda_projecao.push(mes_projetado)                                
+          serie_vendas_realizadas.push(0);
+        }      
         dados_objetivos.push(x.valor);
         resto_periodo -= 1;
       }
 
       this.barChartData = [
-        {data: dados_objetivos, label: 'Objetivo'},
-        {data: dado, label: 'Vendas'},
-        {data: dados_projecao, label: 'Projeção'}
+
+        {data: serie_venda_projecao, label: 'Projeção'},
+        {data: serie_venda_acumulada, label: 'Acumulado'},
+        {data: serie_vendas_realizadas, label: 'Vendas'},
+        {data: dados_objetivos, label: 'Objetivo'}
     ];
     }
     getter()
