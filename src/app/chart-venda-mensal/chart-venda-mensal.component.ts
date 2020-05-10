@@ -72,7 +72,7 @@ export class ChartVendaMensalComponent implements OnInit {
       {
         if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
           valor_projecao -= dados[x.mes]
-          valor_acumulado += dados[mes];
+          valor_acumulado += dados[x.mes];
           serie_venda_acumulada.push(valor_acumulado);
          
          
