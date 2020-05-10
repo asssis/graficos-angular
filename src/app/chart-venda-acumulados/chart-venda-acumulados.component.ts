@@ -38,14 +38,23 @@ export class ChartVendaAcumuladosComponent implements OnInit {
       var total_vendas = 0;
       var total_objetivo = 0;
       var venda_mes_valor = []
-      
+
       for (let venda of vendas) {
         var mes = venda['mes'].toString().padStart(2, "0")
         if(venda_mes_valor[mes] == null)
         {
           venda_mes_valor[mes] =  0
         }
-        venda_mes_valor[mes] += parseFloat(venda['quantidade'])* parseFloat(venda['valor_unico'].replace(',', '.'));
+        venda_mes_valor[mes] += parseFloat(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
+      }
+      var objetivos_mes_valor = {}
+      for (let objetivo of objetivos )
+      {   
+        if(objetivos_mes_valor[objetivo['mes']] == null)
+        {
+          objetivos_mes_valor[objetivo['mes']] =  0;
+        }
+        objetivos_mes_valor[objetivo['mes']] = objetivo['valor'];
       }
       var meses = Object.keys(venda_mes_valor).sort();
       var vendas_acumuladas = [];
@@ -54,15 +63,21 @@ export class ChartVendaAcumuladosComponent implements OnInit {
 
       
 
+      var valor_acumulado_objetivo = 0
+      var seria_acumulada_objetivo = []
       for (let mes of meses )
       {
         valor_acumulado += venda_mes_valor[mes];
         vendas_acumuladas.push(valor_acumulado);
+        valor_acumulado_objetivo += objetivos_mes_valor[mes];
+        seria_acumulada_objetivo.push(valor_acumulado_objetivo);
+        campos_graficos.push(this.get_week(mes));
       }
 
       this.barChartLabels = campos_graficos;
       this.barChartData = [
-        {data: vendas_acumuladas, label: 'ACUMULADO'}
+        {data: vendas_acumuladas, label: 'ACUMULADO'},
+        {data: seria_acumulada_objetivo, label: 'OBJETIVO'}
     ];
     }
     getter()
