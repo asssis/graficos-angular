@@ -70,6 +70,7 @@ export class ChartVendaMensalComponent implements OnInit {
       var serie_vendas_realizadas = []
       var venda_objetiva_acumulada = 0      
       var projecao_acumulada = 0;
+      var ultimo_mes = 0;
       for(let x of objetivos_ordenado)
       {
         if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
@@ -79,21 +80,37 @@ export class ChartVendaMensalComponent implements OnInit {
           serie_vendas_realizadas.push(dados[x.mes]);
           projecao_acumulada += dados[x.mes];
           serie_venda_projecao.push(projecao_acumulada);
-        }
-        else{
-          this.barChartLabels.push(this.get_week(x.mes));
-          var mes_projetado = valor_projecao / resto_periodo
-          valor_projecao -= mes_projetado
-          projecao_acumulada += mes_projetado;
-          serie_venda_projecao.push(projecao_acumulada);                                
-          serie_vendas_realizadas.push(0);
-        }      
+          ultimo_mes = parseInt(x.mes);
+        }  
         venda_objetiva_acumulada += x.valor;
-
         dados_objetivos.push(venda_objetiva_acumulada);
         resto_periodo -= 1;
       }
+      var media_vendas_realizadas = projecao_acumulada / serie_vendas_realizadas.length;
+     
 
+      for(var i = 0; i <= 1; i++){
+        ultimo_mes += 1
+        this.barChartLabels.push(this.get_week(ultimo_mes));   
+        projecao_acumulada += media_vendas_realizadas;
+        serie_venda_projecao.push(projecao_acumulada);
+      }
+     
+      ultimo_mes += 1
+      projecao_acumulada += media_vendas_realizadas;
+      var ultimo = serie_venda_projecao.length;
+      serie_venda_projecao.push(serie_venda_projecao[ultimo-1]);
+      this.barChartLabels.push(this.get_week(ultimo_mes));  
+  
+      for(var i = 1; i <= 3; i++){
+          ultimo_mes += 1
+          var ultimo = serie_venda_projecao.length;
+          var v1 = serie_venda_projecao[ultimo-1];
+          var v2 = serie_venda_projecao[ultimo-3];
+
+          serie_venda_projecao.push(v2 + v1);
+          this.barChartLabels.push(this.get_week(ultimo_mes));  
+      }
       this.barChartData = [
         {data: serie_venda_acumulada, label: 'Acumulado'},
         {data: dados_objetivos, label: 'Objetivo'},

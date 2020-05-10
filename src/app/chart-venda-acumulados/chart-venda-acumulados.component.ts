@@ -33,61 +33,76 @@ export class ChartVendaAcumuladosComponent implements OnInit {
     }
     montar_grafico(objetos: any)
     {
+      if(objetos == null)
+      {
+        return
+      }
       var vendas = objetos['vendas']
-      var objetivos =  objetos['objetivos']
-      var total_vendas = 0;
-      var total_objetivo = 0;
-      var venda_mes_valor = []
-
+      var objetivos = objetos['objetivos']
+      var dados = {}
+      var valor_projecao = 0
+      var serie_venda_projecao = [];
       for (let venda of vendas) {
         var mes = venda['mes'].toString().padStart(2, "0")
-        if(venda_mes_valor[mes] == null)
+        if(dados[mes] == null)
         {
-          venda_mes_valor[mes] =  0
+          dados[mes] =  0
         }
-        venda_mes_valor[mes] += parseFloat(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
-      }
-      var objetivos_mes_valor = {}
-      for (let objetivo of objetivos )
-      {   
-        if(objetivos_mes_valor[objetivo['mes']] == null)
-        {
-          objetivos_mes_valor[objetivo['mes']] =  0;
-        }
-        objetivos_mes_valor[objetivo['mes']] = objetivo['valor'];
-      }
-      var meses = Object.keys(venda_mes_valor).sort();
-      var vendas_acumuladas = [];
-      var campos_graficos = [];
-      var valor_acumulado = 0;
-      
-
-      var valor_acumulado_objetivo = 0
-      var seria_acumulada_objetivo = []
-      
-      for (let mes of meses )
-      {
-        valor_acumulado += venda_mes_valor[mes];
-        vendas_acumuladas.push(valor_acumulado);
-        valor_acumulado_objetivo += objetivos_mes_valor[mes];
-        seria_acumulada_objetivo.push(valor_acumulado_objetivo);
-        campos_graficos.push(this.get_week(mes));
+        dados[mes] += parseInt(venda['quantidade']) * parseFloat(venda['valor_unico'].replace(',', '.'));
       }
       for (let objetivo of objetivos)
       {
-        var verifica = campos_graficos.indexOf(this.get_week(objetivo['mes']))
-        if(verifica == -1)
-        {
-          campos_graficos.push(this.get_week(objetivo['mes']));
-          valor_acumulado_objetivo += objetivo['valor'];
-          seria_acumulada_objetivo.push(valor_acumulado_objetivo);
-        }
-
+        valor_projecao += parseInt(objetivo['valor'])
       }
-      this.barChartLabels = campos_graficos;
+      var keys = Object.keys(dados).sort();
+      
+      var dado = []
+      var serie_venda_acumulada = []
+      for (let key of keys) {
+        this.barChartLabels.push(this.get_week(key));
+        dado.push(dados[key]);
+      } 
+      var dados_objetivos = []
+      var objetivos_ordenado = objetivos.sort(function(a,b){ return a.mes - b.mes;});
+      var valor_acumulado = 0;
+      var total_objetivo_mes = 0
+      var resto_periodo = objetivos_ordenado.length;
+      var serie_vendas_realizadas = []
+      var venda_objetiva_acumulada = 0      
+      var projecao_acumulada = 0;
+      var ultimo_mes = 0;
+      for(let x of objetivos_ordenado)
+      {
+        if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
+          valor_projecao -= dados[x.mes]
+          valor_acumulado += dados[x.mes];
+          serie_venda_acumulada.push(valor_acumulado);   
+          serie_vendas_realizadas.push(dados[x.mes]);
+          projecao_acumulada += dados[x.mes];
+          serie_venda_projecao.push(projecao_acumulada);
+          ultimo_mes = parseInt(x.mes);
+        }  
+        venda_objetiva_acumulada += x.valor;
+        dados_objetivos.push(venda_objetiva_acumulada);
+        resto_periodo -= 1;
+      }
+      var media_vendas_realizadas = projecao_acumulada / serie_vendas_realizadas.length;
+     
+
+      for(var i = 1; i <= 4; i++){
+          ultimo_mes += 1
+          var ultimo = serie_venda_projecao.length;
+          var v1 = serie_venda_projecao[ultimo-3];
+          var v2 = serie_venda_projecao[ultimo-5];
+
+          serie_venda_projecao.push(v2 + v1);
+          this.barChartLabels.push(this.get_week(ultimo_mes));  
+      }
       this.barChartData = [
-        {data: vendas_acumuladas, label: 'ACUMULADO'},
-        {data: seria_acumulada_objetivo, label: 'OBJETIVO'}
+        {data: serie_venda_acumulada, label: 'Acumulado'},
+        {data: dados_objetivos, label: 'Objetivo'},
+
+        {data: serie_venda_projecao, label: 'Projeção'}
     ];
     }
     getter()
