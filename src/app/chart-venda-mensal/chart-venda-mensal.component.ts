@@ -68,34 +68,37 @@ export class ChartVendaMensalComponent implements OnInit {
       var total_objetivo_mes = 0
       var resto_periodo = objetivos_ordenado.length;
       var serie_vendas_realizadas = []
+      var venda_objetiva_acumulada = 0      
+      var projecao_acumulada = 0;
       for(let x of objetivos_ordenado)
       {
         if( this.barChartLabels.indexOf(this.get_week(x.mes)) != -1){
           valor_projecao -= dados[x.mes]
           valor_acumulado += dados[x.mes];
-          serie_venda_acumulada.push(valor_acumulado);
-         
-         
+          serie_venda_acumulada.push(valor_acumulado);   
           serie_vendas_realizadas.push(dados[x.mes]);
-          serie_venda_projecao.push(dados[x.mes]);
+          projecao_acumulada += dados[x.mes];
+          serie_venda_projecao.push(projecao_acumulada);
         }
         else{
           this.barChartLabels.push(this.get_week(x.mes));
           var mes_projetado = valor_projecao / resto_periodo
           valor_projecao -= mes_projetado
-          serie_venda_projecao.push(mes_projetado)                                
+          projecao_acumulada += mes_projetado;
+          serie_venda_projecao.push(projecao_acumulada);                                
           serie_vendas_realizadas.push(0);
         }      
-        dados_objetivos.push(x.valor);
+        venda_objetiva_acumulada += x.valor;
+
+        dados_objetivos.push(venda_objetiva_acumulada);
         resto_periodo -= 1;
       }
 
       this.barChartData = [
-
-        {data: serie_venda_projecao, label: 'Projeção'},
         {data: serie_venda_acumulada, label: 'Acumulado'},
-        {data: serie_vendas_realizadas, label: 'Vendas'},
-        {data: dados_objetivos, label: 'Objetivo'}
+        {data: dados_objetivos, label: 'Objetivo'},
+
+        {data: serie_venda_projecao, label: 'Projeção'}
     ];
     }
     getter()
