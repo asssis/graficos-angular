@@ -11,7 +11,8 @@ export class ChartVendaAcumuladosComponent implements OnInit {
       scaleShowVerticalLines: false,
       responsive: true
     };
-  
+
+    public meta_anual = 6000;
     public barChartLabels = [];
     public barChartType = 'line';
     public barChartLegend = true;
@@ -88,20 +89,18 @@ export class ChartVendaAcumuladosComponent implements OnInit {
       }
       var media_vendas_realizadas = projecao_acumulada / serie_vendas_realizadas.length;
      
+      var meta_mensal = this.meta_anual / 12;
 
-      for(var i = 1; i <= 4; i++){
+      for(var i = 1; i <= 6; i++){
           ultimo_mes += 1
           var ultimo = serie_venda_projecao.length;
-          var v1 = serie_venda_projecao[ultimo-3];
-          var v2 = serie_venda_projecao[ultimo-5];
-
-          serie_venda_projecao.push(v2 + v1);
+          projecao_acumulada += media_vendas_realizadas
+          serie_venda_projecao.push(projecao_acumulada);
           this.barChartLabels.push(this.get_week(ultimo_mes));  
       }
       this.barChartData = [
         {data: serie_venda_acumulada, label: 'Acumulado'},
         {data: dados_objetivos, label: 'Objetivo'},
-
         {data: serie_venda_projecao, label: 'Projeção'}
     ];
     }
