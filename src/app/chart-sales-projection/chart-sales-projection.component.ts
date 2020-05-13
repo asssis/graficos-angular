@@ -6,6 +6,7 @@ import { SalesService } from '../services/sales.service';
 })
 
 export class ChartSalesProjectionComponent implements OnInit {
+  //chart attributes
   public barChartLabels = [];
   public barChartType = 'line';
   public barChartLegend = true;
@@ -37,6 +38,8 @@ export class ChartSalesProjectionComponent implements OnInit {
     var arrayAmount = [parseInt(sales[0].Value)];
     var arrayProjection = [parseInt(sales[0].Value)];
     var average = parseInt(sales[0].Value);
+    
+    //processing chart data 
     for(var i = 1; i < sales.length; i++)
     {
       if(sales[i].Projection)
@@ -52,7 +55,7 @@ export class ChartSalesProjectionComponent implements OnInit {
       arrayGoal.push((parseInt(goal.Amount) / sales.length) * (i+1)); 
     }
     
-    
+    //load in chart
     this.barChartData = [{data: arrayAmount, label: 'Sales'},
                          {data: arrayGoal, label: 'Goal'},
                          {data: arrayProjection, label: 'Projection'}];
