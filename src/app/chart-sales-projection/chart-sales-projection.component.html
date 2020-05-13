@@ -1,0 +1,31 @@
+
+    <div class="input-group content-group col-lg-12">   
+        <div class="form-group col-md-2">
+            <label>Date Start</label>
+            <input type="date" class="form-control" (change)="onChange()" [(ngModel)]="Goal.Start">
+        </div> 
+        <div class="form-group col-md-2">
+            <label>Period</label>
+            {{Goal.PeriodType}}
+            <!--<input type="date" class="form-control" (change)="onChange()" [(ngModel)]="Goal.End"> -->
+            <select class="form-control col-md-12" (change)="onChange()" [(ngModel)]="Goal.PeriodType"> 
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Biweekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="semiannual">Semiannual</option>
+                <option value="yearly">Yearly</option>
+            </select>
+        </div>      
+    </div>
+    <div style="display: block;">
+        <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+        </canvas>
+    </div>
+    
+    

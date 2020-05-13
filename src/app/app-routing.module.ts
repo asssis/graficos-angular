@@ -5,6 +5,7 @@ import { ChartVendaMensalComponent } from './chart-venda-mensal/chart-venda-mens
 import { TabelaVendasComponent } from './tabela-vendas/tabela-vendas.component';
 import { ChartVendaAcumuladosComponent } from './chart-venda-acumulados/chart-venda-acumulados.component';
 import { FazerVendaComponent } from './fazer-venda/fazer-venda.component';
+import { ChartSalesProjectionComponent } from './chart-sales-projection/chart-sales-projection.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'venda-mensal', component: ChartVendaMensalComponent},
   {path: 'venda-tabela', component: TabelaVendasComponent},
   {path: 'venda-acumulada', component: ChartVendaAcumuladosComponent},
-  {path: 'fazer-vendas', component: FazerVendaComponent}
+  {path: 'fazer-vendas', component: FazerVendaComponent},
+  {path: 'chart-sales', component: ChartSalesProjectionComponent}
 ];
 ChartVendaAcumuladosComponent
 @NgModule({

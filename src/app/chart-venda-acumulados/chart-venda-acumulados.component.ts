@@ -4,7 +4,6 @@ import { VendasService } from '../services/vendasservice.service';
 @Component({
   selector: 'app-chart-venda-acumulados',
   templateUrl: './chart-venda-acumulados.component.html',
-  styleUrls: ['./chart-venda-acumulados.component.css']
 })
 export class ChartVendaAcumuladosComponent implements OnInit {
     public barChartOptions = {

@@ -12,7 +12,8 @@ import { ChartVendaProdutoComponent } from './chart-venda-produto/chart-venda-pr
 import { TabelaVendasComponent } from './tabela-vendas/tabela-vendas.component';
 import { ChartVendaAcumuladosComponent } from './chart-venda-acumulados/chart-venda-acumulados.component';
 import { FazerVendaComponent } from './fazer-venda/fazer-venda.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { ChartSalesProjectionComponent } from './chart-sales-projection/chart-sales-projection.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms'
     ChartVendaProdutoComponent,
     TabelaVendasComponent,
     ChartVendaAcumuladosComponent,
-    FazerVendaComponent
+    FazerVendaComponent,
+    ChartSalesProjectionComponent
  ],
   imports: [
     BrowserModule,
