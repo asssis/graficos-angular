@@ -1,5 +1,33 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+ @Injectable({
+    providedIn: 'root'
+ })
+
 export class SalesService {
-    public getSales(startDate: string, periodType: string)
+  constructor(private http: HttpClient) {}  
+  sales: any;
+  API = "http://localhost:3000/"
+
+  getSales(startDate: string, periodType: string): any
+  { 
+    var formatDate = "";
+    if(startDate != null)
+    {
+      formatDate = startDate.substring(8, 10);
+      formatDate += "/";
+      formatDate += startDate.substring(5, 7);
+      formatDate += "/";
+      formatDate += startDate.substring(0, 4);
+    }
+    else
+    {
+      formatDate = "";
+    }
+    return this.http.get<any>(`${this.API}sale/pesquisa?periodType=${periodType}&startDate=${formatDate}`);
+  }
+  public getSaless(startDate: string, periodType: string)
     {
       return this.Goal;
       if(periodType == 'monthly')

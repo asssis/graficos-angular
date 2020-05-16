@@ -19,19 +19,18 @@ export class ChartSalesProjectionComponent implements OnInit {
     PeriodType: null,
     History: []
   };
-  constructor() {}
+  constructor(private service: SalesService) {}
   ngOnInit(): void {
+    this.getSalesServices(null, "monthly");
     this.Goal.PeriodType = "monthly";
-    this.loadChart(null);
-    this.loadChart(this.Goal);
   }
   
   onChange(): void {
-    this.loadChart(this.Goal);
+    this.getDate();
+    this.getSalesServices(this.Goal.Start, this.Goal.PeriodType);
   }
   public loadChart(goal: any)
   {
-    goal = this.getSalesServices(this.Goal.Start, this.Goal.PeriodType);
     var sales = goal.History;
     var arrayDates = sales.map(a => a.Date);
     var arrayGoal = [parseInt(goal.Amount) / sales.length];
@@ -61,16 +60,79 @@ export class ChartSalesProjectionComponent implements OnInit {
                          {data: arrayProjection, label: 'Projection'}];
     this.barChartLabels = arrayDates;
   }
-  public getSalesServices(startDate: string, periodType: string)
+  public getSalesServices(startDate: string, periodType: string): any
   {   
-    return <any>new SalesService().getSales(startDate, periodType);  
+    this.service.getSales(startDate, periodType).subscribe(data => {
+      this.Goal = data;
+      var dt = this.getDate();
+      this.Goal.Start = `${dt.y}-${dt.m}-${dt.d}`;
+      this.loadChart(data);            
+      var dt = this.getDate();
+      this.Goal.Start = `${dt.y}-${dt.m}-${dt.d}`;
+      this.loadChart(data);            
+    }, (error: any) => {
+      console.log('ERROR', error);            
+    });
   }
-  public getMonthYear(mes: number): string {
-    var d = new Date();
-    var m  = d.getMonth() + 1;
-    var y = d.getFullYear();
-    if(mes < 0){m  = d.getMonth() + 1;}
-    else{y -= mes;}
-    return [("00"+m).slice(-2), y].join('/');
+ public getDate()
+ {
+   var v = this.Goal.Start.indexOf('-');
+   if(v == 4)
+   {
+  return {d: this.Goal.Start.substring(8, 10),
+          m: this.Goal.Start.substring(5, 7),
+          y: this.Goal.Start.substring(0, 4)}
+  }
+  else{
+
+  return {d: this.Goal.Start.substring(0, 2),
+    m: this.Goal.Start.substring(3, 5),
+    y: this.Goal.Start.substring(6, 10)}
+  }
+ }
+ 
+  public next_prev(event: string)
+  {
+    var dt = this.getDate();
+
+    if(this.Goal.Start == null){
+    }
+    else if(this.Goal.PeriodType == "weekly"){
+      dt.d = parseInt(dt.d) + parseInt(event) * 7;
+    }   
+    else if(this.Goal.PeriodType == "biweekly"){
+      dt.d = parseInt(dt.d) + parseInt(event) * 14;
+    }
+    else if(this.Goal.PeriodType == "monthly"){
+      dt.m = parseInt(dt.m) + parseInt(event);
+    }
+    else if(this.Goal.PeriodType == "quarterly"){
+      dt.m = parseInt(dt.m) + (parseInt(event) * 3);
+    }
+    else if(this.Goal.PeriodType == "semiannual"){
+      dt.m = parseInt(dt.m) + (parseInt(event) * 6);
+    }
+    else if(this.Goal.PeriodType == "yearly"){
+      dt.m = parseInt(dt.m) + (parseInt(event) * 12);
+    }
+    if(dt.d > 28){
+      dt.m = parseInt(dt.m) + 1;
+      dt.d = 1;
+    }else if(dt.d < 1){
+      dt.m = parseInt(dt.m) - 1;
+      dt.d = 28;
+    }
+
+    if(dt.m > 12){
+      dt.y = parseInt(dt.y) + 1;
+      dt.m = 1;
+    }else if(dt.m < 1){
+      dt.y = parseInt(dt.y) - 1;
+      dt.m = 12;
+    }
+    dt.d = ("00" + dt.d).slice(-2);
+    dt.m = ("00" + dt.m).slice(-2);
+    this.Goal.Start = `${dt.y}-${dt.m}-${dt.d}`;
+    this.getSalesServices(this.Goal.Start, this.Goal.PeriodType)
   }
 }
