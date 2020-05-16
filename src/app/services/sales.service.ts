@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class SalesService {
   constructor(private http: HttpClient) {}  
   sales: any;
-  API = "http://localhost:3000/"
+  API = "http://104.214.39.0:3000/"
 
   getSales(startDate: string, periodType: string): any
   { 
