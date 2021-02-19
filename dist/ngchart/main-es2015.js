@@ -708,7 +708,7 @@ __webpack_require__.r(__webpack_exports__);
 class SalesService {
     constructor(http) {
         this.http = http;
-        this.API = "http://54.233.105.4:3000/";
+        this.API = "http://34.95.209.145:4000/";
         this.Goal = {
             Amount: "500",
             Start: "01/01/2020",
@@ -863,7 +863,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/assis/projetos_estudo/graficos-angular/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/assis/projetos/graficos-angular/src/main.ts */"./src/main.ts");
 
 
 /***/ })

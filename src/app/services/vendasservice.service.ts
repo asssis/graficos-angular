@@ -11,7 +11,7 @@ export class VendasService {
   constructor(private http: HttpClient) {}
    getVendas(): Observable<any>
    { 
-      return  this.http.get("http://54.233.105.4:3000/dados");
+      return  this.http.get("http://34.95.209.145/:4000/dados");
    }
  
 }
